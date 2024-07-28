@@ -1,19 +1,19 @@
+import React from 'react'
+import {AppContent, AppSidebar} from '../components/index'
 
 export default function DefaultLayout() {
  return(
     <>
 
-        <main className="c-main">
-            <div className="container-fluid">
-                <div className="fade-in">
-                    <div className="row">
-                        <div className="col-md-12">
-                            Hello World
-                        </div>
-                    </div>
-                </div>
+        <AppSidebar/>
+        <div className="wrapper d-flex flex-column min-vh-100">
+            {/*<AppHeader/>*/}
+            <div className="body flex-grow-1">
+                <AppContent/>
             </div>
-        </main>
+            {/*<AppFooter/>*/}
+        </div>
+
     </>
 )
 }
