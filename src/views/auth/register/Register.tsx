@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   CButton,
   CCard,
-  CCardBody,
+  CCardBody, CCardFooter,
   CCol,
   CContainer,
   CForm,
@@ -13,30 +13,83 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
+import * as yup from "yup";
+import {showToast} from "../../../utils";
+import AuthService from "../../../services/auth.service.ts";
+
+const schema = yup.object().shape({
+  username: yup.string().required("validation.required"),
+  email: yup.string().required("validation.required").email("validation.email"),
+  password: yup.string().required("validation.required"),
+});
+
 
 const Register = () => {
+  const [isRegistering, setIsRegistering] = useState(false);
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (data) => {
+    setIsRegistering(true);
+    AuthService.register({
+      ...data,
+    }).then(
+      (res) => {
+        setIsRegistering(false);
+        showToast({type: "success",
+        message:"Rejestracja przebiegła pomyślnie"});
+        navigate("/login");
+      },
+      (error) => {
+        showToast({type:"error",
+        message:error.response.data.message});
+        setIsRegistering(false);
+      }
+    );
+  };
+
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md={9} lg={7} xl={6}>
+
             <CCard className="mx-4">
               <CCardBody className="p-4">
-                <CForm>
+                <CForm onSubmit={handleSubmit(onSubmit)}>
                   <h1>Rejestracja</h1>
-                  <p className="text-body-secondary">Create your account</p>
+                  <p className="text-body-secondary">Załóż konto</p>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
                     </CInputGroupText>
                     <CFormInput
-                      placeholder="Username"
+                      placeholder="Nazwa użytkownika"
                       autoComplete="username"
+                      onChange={register("username").onChange}
+                      invalid={errors.username != null}
+                      feedbackInvalid={errors.username?.message}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
-                    <CFormInput placeholder="Email" autoComplete="email" />
+                    <CFormInput
+                        placeholder="Email"
+                        autoComplete="email"
+                        invalid={errors.email != null}
+                        feedbackInvalid={errors.email?.message}
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
@@ -44,8 +97,10 @@ const Register = () => {
                     </CInputGroupText>
                     <CFormInput
                       type="password"
-                      placeholder="Password"
+                      placeholder="Hasło"
                       autoComplete="new-password"
+                      invalid={errors.password != null}
+                      feedbackInvalid={errors.password?.message}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-4">
@@ -54,17 +109,23 @@ const Register = () => {
                     </CInputGroupText>
                     <CFormInput
                       type="password"
-                      placeholder="Repeat password"
+                      placeholder="Powtórz hasło"
                       autoComplete="new-password"
+                      invalid={errors.password != null}
+                      feedbackInvalid={errors.password?.message}
                     />
                   </CInputGroup>
                   <div className="d-grid">
-                    <CButton color="success">Create Account</CButton>
+                    <CButton color="success">Załóż konto</CButton>
                   </div>
                 </CForm>
+                <CRow className={"py-3"}>
+                  <p className="text-center">
+                    Masz juz konto? <a href="/login">Zaloguj się</a>
+                  </p>
+                </CRow>
               </CCardBody>
             </CCard>
-          </CCol>
         </CRow>
       </CContainer>
     </div>
