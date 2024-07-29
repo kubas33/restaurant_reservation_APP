@@ -1,0 +1,10 @@
+{
+    "validation": {
+      "email": "Email is not correct.",
+      "maxLength": "The entered value should be shorter than {{max}} characters.",
+      "minLength": "The entered value should be longer than {{min}} characters.",
+      "passwordMustMatch": "Passwords must match",
+      "required": "Field is required."
+    }
+  }
+  

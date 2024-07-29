@@ -1,0 +1,9 @@
+{
+    "validation": {
+    "email": "Email jest nieprawidłowy.",
+    "maxLength": "Podana wiadomość powinna być krótsza niż {{max}} znaków.",
+    "minLength": "Podana wiadomość powinna być dłuższa niż {{min}} znaków.",
+    "passwordMustMatch": "Hasła powinny być takie same",
+    "required": "Pole jest wymagane."
+    }
+}
