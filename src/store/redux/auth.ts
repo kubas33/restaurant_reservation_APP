@@ -10,6 +10,7 @@ const authSlice = createSlice({
         login(state, action) {
             localStorage.setItem(`${import.meta.env.VITE_STORAGE_KEY}-currentUser`, JSON.stringify(action.payload));
             state.currentUser = action.payload;
+
         },
         logout(state) {
             localStorage.removeItem(`${import.meta.env.VITE_STORAGE_KEY}-currentUser`);

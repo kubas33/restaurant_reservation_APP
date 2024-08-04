@@ -15,6 +15,10 @@
       "@services/*": ["./services/*"],
       "@components/*": ["./components/*"],
       "@views/*": ["./views/*"],
+      "@interfaces/*": ["./interfaces/*"]
     }
-  }
+  },
+  "include": [
+    "src/**/*"
+  ]
 }

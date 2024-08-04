@@ -24,7 +24,7 @@
       "administration": "Administracja",
       "users": "Użytkownicy",
       "roles": "Role",
-      "projects": "Projekty",
+      "restaurants": "Restauracje",
       "tickets": "Zgłoszenia",
       "myTickets": "Moje zgłoszenia",
       "addTicket": "Dodaj zgłoszenie",
@@ -255,9 +255,9 @@
       "createProject": "Utwórz Projekt",
       "updateProject": "Zaktualizuj Projekt"
     },
-    "projectTable": {
+    "restaurantTable": {
       "id": "ID",
-      "clientName": "Nazwa Klienta",
+      "cuisine": "Kuchnia",
       "name": "Nazwa",
       "createdAt": "Utworzono",
       "updatedAt": "Zaktualizowano",
@@ -278,7 +278,7 @@
     "projectPage": {
       "unauthorized": "Nieautoryzowany",
       "noPermission": "Nie masz uprawnień do dostępu do tej strony.",
-      "projects": "Projekty"
+      "title": "Restauracje"
     },
     "projectUsersTable": {
       "id": "ID",

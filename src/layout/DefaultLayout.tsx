@@ -5,7 +5,7 @@ export default function DefaultLayout() {
   return (
     <>
       <AppSidebar />
-      <div className="wrapper d-flex flex-column min-vh-100">
+      <div className="wrapper d-flex flex-column min-vh-100" style={{width: "100vw"}}>
         <AppHeader />
         <div className="body flex-grow-1">
           <AppContent />

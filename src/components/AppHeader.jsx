@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import i18n from "../i18n";
 // import { updateUserLanguage } from "../services/users.service.js";
 
-const AppHeader = () => {
+export const AppHeader = React.memo(() => {
   const { t } = useTranslation();
   const headerRef = useRef();
   const { colorMode, setColorMode } = useColorModes(
@@ -190,6 +190,4 @@ const AppHeader = () => {
       </CContainer>
     </CHeader>
   );
-};
-
-export default AppHeader;
+});

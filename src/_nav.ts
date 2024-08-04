@@ -31,8 +31,8 @@ const useNavigationItems = () => {
                 },
                 {
                     component: CNavItem,
-                    name: t('nav.projects'),
-                    to: '/projects',
+                    name: t('nav.restaurants'),
+                    to: '/admin/restaurants',
                     // permissions: ['PROJECTS_VIEW'],
                 },
             ],

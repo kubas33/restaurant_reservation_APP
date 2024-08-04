@@ -6,7 +6,7 @@ import {CContainer, CSpinner} from '@coreui/react'
 import routes from '../routes'
 import {boolean} from "yup";
 
-const AppContent = () => {
+export const AppContent = React.memo(() => {
     return (
         <CContainer className="px-4" fluid={true}>
             <Suspense fallback={<CSpinner color="primary"/>}>
@@ -31,6 +31,5 @@ const AppContent = () => {
             </Suspense>
         </CContainer>
     )
-}
+});
 
-export default React.memo(AppContent)

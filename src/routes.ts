@@ -1,4 +1,6 @@
 import React from 'react'
+import {RestaurantsList} from "./views/restaurants/RestaurantsList.tsx";
+import {RestaurantsAdminPage} from "./views/restaurants/RestaurantsAdminPage.tsx";
 
 
 // const RolesFormAuth = React.lazy(() => import('./views/dashboard/roles/RolesFormAuth.jsx'))
@@ -19,7 +21,8 @@ import React from 'react'
 // const MyCompletedTicketsAuth = React.lazy(() => import('./views/dashboard/tickets/CompletedTickets.jsx'))
 
 const routes = [
-    {path: '/', exact: true, name: 'Home'},
+    {path: '/', exact: true, name: 'Home', element: RestaurantsList},
+    // {path: '/login', name: 'Login', element: Login},
     // {path: '/dashboard', name: 'Dashboard', element: Dashboard},
     // {path: '/users',exact: true, name: 'Users', element: Users},
     // {path: '/users/create', exact: true, name: 'Create User', element: UsersFormAuth},
@@ -27,7 +30,7 @@ const routes = [
     // {path: '/roles', exact: true, name: 'Roles', element: RolesPage},
     // {path: '/roles/create', exact: true, name: 'Create Role', element: RolesFormAuth},
     // { path: '/roles/edit/:id', exact: true, name: 'Edit Role', element: RolesFormAuth },
-    // { path: '/projects', exact: true, name: 'Projects', element: ProjectsPage },
+    { path: '/admin/restaurants', exact: true, name: 'Admin Restaurants', element: RestaurantsAdminPage },
     // {path: '/projects/create', exact: true, name: 'Create Project', element: ProjectsFormAuth},
     // { path: '/projects/edit/:id', exact: true, name: 'Edit Project', element: ProjectsFormAuth },
     // {path: '/settings',exact: true, name: 'Settings', element: Settings},

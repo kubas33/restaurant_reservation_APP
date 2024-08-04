@@ -53,24 +53,29 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     setIsLogging(true);
+    console.log(data);
     AuthService.login({
       ...data,
     }).then(
       (res) => {
         setIsLogging(false);
-        const data = res.data;
+        console.log(res)
+        const data = res.data.data;
         const currentUser = {
-          id: data.id,
-          email: data.email,
-          name: data.name,
+          id: data.user?.id,
+          email: data.user?.email,
+          name: data.user?.name,
           token: data.token,
-          avatarUrl: data.avatarUrl,
-          permissions: data.permissions,
-          language: data.defaultLanguage,
+          // avatarUrl: data.avatarUrl,
+          // permissions: data.permissions,
+          // language: data.defaultLanguage,
         };
+        console.log(data);
+        console.log(currentUser);
+
         showToast({ type: "success", message: "Pomyślnie zalogowano" });
         dispatch(authActions.login(currentUser));
-        navigate("/dashboard");
+        navigate("/");
       },
       () => {
         showToast({ type: "error", message: "Nieprawidłowe dane logowania" });
