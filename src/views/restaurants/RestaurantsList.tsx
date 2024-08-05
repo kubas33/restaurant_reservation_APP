@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {RestaurantData} from "../../interfaces/Restaurants.ts";
+import {RestaurantData} from "../../interfaces/Restaurant.interface.ts";
 import {getRestaurants} from "../../services/restaurant.service.ts";
 import {RestaurantCard} from "../../components/restaurant/RestaurantCard.tsx";
 import {CCol, CRow} from "@coreui/react";

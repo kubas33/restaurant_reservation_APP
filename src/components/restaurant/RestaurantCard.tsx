@@ -1,7 +1,7 @@
 import {CButton, CCard, CCardBody, CCardFooter, CCardImage, CCardText, CCardTitle} from "@coreui/react";
 import React, {useState} from "react";
 import {useSelector} from "react-redux";
-import {RestaurantData} from "../../interfaces/Restaurants.ts";
+import {RestaurantData} from "../../interfaces/Restaurant.interface.ts";
 import {number} from "yup";
 
 interface RestaurantCardProps {

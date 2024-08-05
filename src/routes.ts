@@ -1,6 +1,7 @@
 import React from 'react'
 import {RestaurantsList} from "./views/restaurants/RestaurantsList.tsx";
 import {RestaurantsAdminPage} from "./views/restaurants/RestaurantsAdminPage.tsx";
+import {RestaurantForm} from "./components/restaurant/RestaurantForm.tsx";
 
 
 // const RolesFormAuth = React.lazy(() => import('./views/dashboard/roles/RolesFormAuth.jsx'))
@@ -31,8 +32,8 @@ const routes = [
     // {path: '/roles/create', exact: true, name: 'Create Role', element: RolesFormAuth},
     // { path: '/roles/edit/:id', exact: true, name: 'Edit Role', element: RolesFormAuth },
     { path: '/admin/restaurants', exact: true, name: 'Admin Restaurants', element: RestaurantsAdminPage },
-    // {path: '/projects/create', exact: true, name: 'Create Project', element: ProjectsFormAuth},
-    // { path: '/projects/edit/:id', exact: true, name: 'Edit Project', element: ProjectsFormAuth },
+    {path: '/admin/restaurants/create', exact: true, name: 'Create Restaurant', element: RestaurantForm},
+    { path: '/admin/restaurants/edit/:id', exact: true, name: 'Edit Restaurant', element: RestaurantForm },
     // {path: '/settings',exact: true, name: 'Settings', element: Settings},
     // {path: '/projects',exact: true, name: 'Projects', element: Projects},
     // {path: '/addticket',exact: true, name: 'AddTicket', element: AddTicketAuth},

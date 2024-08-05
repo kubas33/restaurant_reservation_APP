@@ -16,7 +16,8 @@
       "@components/*": ["./components/*"],
       "@views/*": ["./views/*"],
       "@interfaces/*": ["./interfaces/*"]
-    }
+    },
+    "moduleResolution": "NodeNext",
   },
   "include": [
     "src/**/*"

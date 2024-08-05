@@ -22,18 +22,18 @@ import {
 import { useNavigate } from "react-router-dom";
 import { t } from "i18next";
 import {
-  cibTableau,
-  cilChevronLeft,
-  cilChevronRight,
-  cilFilter,
-  cilPencil,
-  cilPlus,
-  cilReload,
-  cilSearch,
-  cilTrash,
+    cibTableau, cilCalendar,
+    cilChevronLeft,
+    cilChevronRight, cilDinner,
+    cilFilter,
+    cilPencil,
+    cilPlus,
+    cilReload,
+    cilSearch,
+    cilTrash,
 } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
-import { RestaurantData } from "../../interfaces/Restaurants.ts";
+import {RestaurantData, RestaurantsResponse} from "../../interfaces/Restaurant.interface.ts";
 
 interface ApiResponse {
   data: {
@@ -49,19 +49,7 @@ interface ApiResponse {
   success: boolean;
 }
 
-interface ApiResponse {
-  data: {
-    response: RestaurantData[];
-    pagination: {
-      currentPage: number;
-      totalPages: number;
-      previousPage: number | null;
-      nextPage: number | null;
-      totalItems: number;
-    };
-  };
-  success: boolean;
-}
+
 
 const tooltipStyle = {
   display: "inline-block",
@@ -94,7 +82,7 @@ export const RestaurantsTable: React.FC = () => {
           page,
           limit: 10,
           keyword,
-        })) as ApiResponse;
+        })) as RestaurantsResponse;
         if (response.success && Array.isArray(response.data.response)) {
           setRestaurants(response.data.response);
         } else {
@@ -261,7 +249,7 @@ export const RestaurantsTable: React.FC = () => {
               <CTableDataCell>
                 <div className="d-flex">
                   <CTooltip
-                    content={t("restaurantTable.editProject")}
+                    content={t("restaurantTable.editRestaurant")}
                     placement="top"
                   >
                     <div style={tooltipStyle}>
@@ -275,7 +263,7 @@ export const RestaurantsTable: React.FC = () => {
                     </div>
                   </CTooltip>
                   <CTooltip
-                    content={t("restaurantTable.deleteProject")}
+                    content={t("restaurantTable.deleteRestaurant")}
                     placement="top"
                   >
                     <div style={tooltipStyle}>
@@ -298,12 +286,12 @@ export const RestaurantsTable: React.FC = () => {
                         onClick={() => handleManageTablesClick(restaurant.id)}
                         className="me-2"
                       >
-                        <CIcon icon={cibTableau} />
+                        <CIcon icon={cilDinner} />
                       </CButton>
                     </div>
                   </CTooltip>
                   <CTooltip
-                    content={t("restaurantTable.manageTables")}
+                    content={t("restaurantTable.manageReservations")}
                     placement="top"
                   >
                     <div style={tooltipStyle}>
@@ -314,7 +302,7 @@ export const RestaurantsTable: React.FC = () => {
                         }
                         className="me-2"
                       >
-                        <CIcon icon={cibTableau} />
+                        <CIcon icon={cilCalendar} />
                       </CButton>
                     </div>
                   </CTooltip>
@@ -358,7 +346,7 @@ export const RestaurantsTable: React.FC = () => {
           </div>
         </CTooltip>
       </CButtonGroup>
-      <CTooltip content={t("restaurantTable.createProject")} placement="top">
+      <CTooltip content={t("restaurantTable.createRestaurant")} placement="top">
         <div style={tooltipStyle}>
           <CButton color="success" onClick={handleCreateClick}>
             <CIcon icon={cilPlus} />
