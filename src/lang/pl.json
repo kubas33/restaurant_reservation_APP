@@ -249,11 +249,14 @@
     "errorCreatingComment": "Błąd podczas tworzenia komentarza",
     "errorDownloadingAttachment": "Błąd podczas pobierania załącznika",
     "errorDownloadingCommentAttachment": "Błąd podczas pobierania załącznika do komentarza",
-    "projectForm": {
-      "projectName": "Nazwa Projektu",
-      "clientName": "Nazwa Klienta",
-      "createProject": "Utwórz Projekt",
-      "updateProject": "Zaktualizuj Projekt"
+    "restaurantForm": {
+      "restaurantName": "Nazwa Restauracji",
+      "cuisine": "Rodzaj kuchni",
+      "description": "Opis",
+      "address": "Adres",
+      "phone": "Telefon kontaktowy",
+      "createRestaurant": "Utwórz restaurację",
+      "updateRestaurant": "Zaktualizuj restaurację"
     },
     "restaurantTable": {
       "id": "ID",
@@ -311,6 +314,13 @@
     "attachment": "Załącznik",
     "noData": "Brak podanej daty",
     "acceptedProcess": "Przyjęte do realizacji",
-    "completionTime": "Czas realizacji"
+    "completionTime": "Czas realizacji",
+    "global" : {
+      "buttons": {
+        "create": "Utwórz",
+        "update": "Aktualizuj",
+        "cancel": "Anuluj"
+      }
+     }
   }
   

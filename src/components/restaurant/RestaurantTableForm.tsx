@@ -13,9 +13,9 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
-  createRestaurant,
+  createTable as createTable,
   getRestaurant,
-  updateRestaurant,
+  updateTable as updateTable,
 } from "../../services/restaurant.service";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -31,10 +31,7 @@ export const RestaurantForm = () => {
   const { id } = useParams();
   const { t } = useTranslation();
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
-  const [cuisine, setCuisine] = useState("");
-  const [description, setDescription] = useState("");
+  const [seats, setSeats] = useState("");
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.auth.currentUser);
   const token = currentUser?.token;
@@ -46,7 +43,7 @@ export const RestaurantForm = () => {
     navigate("/restaurants");
   };
 
-  const getRestaurantData = useCallback(async () => {
+  const getTableData = useCallback(async () => {
     if (!token) {
       navigate("/login");
       return;
@@ -56,19 +53,15 @@ export const RestaurantForm = () => {
     setIsEditing(true);
 
     try {
-      const response = await getRestaurant(token, +id!!);
-      const { name, address, phone, cuisine, description } =
-        response.data.response;
+      const response = await getTable(token, +id!!);
+      const { name, seats } = response.data.response;
       setName(name);
-      setAddress(address);
-      setPhone(phone);
-      setCuisine(cuisine);
-      setDescription(description);
+      setSeats(seats);
     } catch (error) {
-      console.error("Failed to fetch restaurant data:", error);
+      console.error("Failed to fetch table data:", error);
       showToast({
         type: "error",
-        message: "Nie udało się pobrać danych restauracji",
+        message: "Nie udało się pobrać danych stolika",
       });
     } finally {
       setLoading(false);
@@ -77,24 +70,24 @@ export const RestaurantForm = () => {
 
   useEffect(() => {
     if (id) {
-      getRestaurantData();
+      getTableData();
     }
-  }, [id, getRestaurantData]);
+  }, [id, getTableData]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const restaurantData = { name, address, phone, cuisine, description };
+    const tableData = { name, seats };
 
     try {
       if (!isEditing) {
         try {
-          await createRestaurant(token, restaurantData);
+          await createTable(token, tableData);
         } catch {
           console.error(error);
         }
       } else {
         try {
-          await updateRestaurant(token, +id!!, restaurantData);
+          await updateTable(token, +id!!, tableData);
         } catch {
           console.error(error);
         } finally {
@@ -113,8 +106,8 @@ export const RestaurantForm = () => {
         <h4 className="centered-header">
           {t(
             !isEditing
-              ? "restaurantForm.createRestaurant"
-              : "restaurantForm.updateRestaurant"
+              ? "restaurantTableForm.createTable"
+              : "restaurantTableForm.updateTable"
           )}
         </h4>
       </CCardHeader>
@@ -124,12 +117,12 @@ export const RestaurantForm = () => {
             <ul className="list-unstyled d-flex flex-column gap-2">
               <li>
                 <CTooltip
-                  content={t("restaurantForm.restaurantName")}
+                  content={t("restaurantTableForm.restaurantName")}
                   placement="top"
                   style={tooltipStyle}
                 >
                   <CFormLabel htmlFor="name" className="mb-1">
-                    {t("restaurantForm.restaurantName")}
+                    {t("restaurantTableForm.restaurantName")}
                   </CFormLabel>
                 </CTooltip>
                 <CFormInput
@@ -142,72 +135,19 @@ export const RestaurantForm = () => {
               </li>
               <li>
                 <CTooltip
-                  content={t("restaurantForm.cuisine")}
+                  content={t("restaurantTableForm.seats")}
                   placement="top"
                   style={tooltipStyle}
                 >
-                  <CFormLabel htmlFor="cuisine" className="mb-1">
-                    {t("restaurantForm.cuisine")}
+                  <CFormLabel htmlFor="seats" className="mb-1">
+                    {t("restaurantTableForm.seats")}
                   </CFormLabel>
                 </CTooltip>
                 <CFormInput
-                  type="text"
-                  id="cuisine"
-                  value={cuisine}
-                  onChange={(e) => setCuisine(e.target.value)}
-                  required
-                />
-              </li>
-              <li>
-                <CTooltip
-                  content={t("restaurantForm.description")}
-                  placement="top"
-                  style={tooltipStyle}
-                >
-                  <CFormLabel htmlFor="description" className="mb-1">
-                    {t("restaurantForm.description")}
-                  </CFormLabel>
-                </CTooltip>
-                <CFormTextarea
-                  id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  required
-                />
-              </li>
-              <li>
-                <CTooltip
-                  content={t("restaurantForm.address")}
-                  placement="top"
-                  style={tooltipStyle}
-                >
-                  <CFormLabel htmlFor="address" className="mb-1">
-                    {t("restaurantForm.address")}
-                  </CFormLabel>
-                </CTooltip>
-                <CFormTextarea
-                  id="address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  required
-                />
-              </li>
-
-              <li>
-                <CTooltip
-                  content={t("restaurantForm.phone")}
-                  placement="top"
-                  style={tooltipStyle}
-                >
-                  <CFormLabel htmlFor="phone" className="mb-1">
-                    {t("restaurantForm.phone")}
-                  </CFormLabel>
-                </CTooltip>
-                <CFormInput
-                  type="text"
-                  id="phone"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  type="number"
+                  id="seats"
+                  value={seats}
+                  onChange={(e) => setSeats(e.target.value)}
                   required
                 />
               </li>
@@ -216,8 +156,8 @@ export const RestaurantForm = () => {
               <CTooltip
                 content={
                   isEditing
-                    ? t("restaurantForm.updateRestaurant")
-                    : t("restaurantForm.createRestaurant")
+                    ? t("restaurantTableForm.updateTable")
+                    : t("restaurantTableForm.createTable")
                 }
                 placement="top"
                 style={tooltipStyle}

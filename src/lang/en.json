@@ -252,12 +252,15 @@
     "errorDownloadingCommentAttachment": "Error downloading comment attachment",
   
     
-      "projectForm": {
-        "projectName": "Project Name",
-        "clientName": "Client Name",
-        "createProject": "Create Project",
-        "updateProject": "Update Project"
-      },
+    "restaurantForm": {
+      "restaurantName": "Restaurant name",
+      "cuisine": "Cuisine",
+      "description": "Description",
+      "address": "Address",
+      "phone": "Contact phone number",
+      "createRestaurant": "Create Restaurant",
+      "updateRestaurant": "Update Restaurant"
+    },
       "restaurantTable": {
       "id": "ID",
       "cuisine": "Cuisine",
