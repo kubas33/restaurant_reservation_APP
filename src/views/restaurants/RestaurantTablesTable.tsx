@@ -36,6 +36,7 @@ import CIcon from "@coreui/icons-react";
 import {RestaurantData, RestaurantsResponse} from "../../interfaces/Restaurant.interface.ts";
 
 
+
 const tooltipStyle = {
   display: "inline-block",
   verticalAlign: "middle",
@@ -75,8 +76,8 @@ export const RestaurantsTable: React.FC = () => {
           setError("Received unexpected data format from server");
         }
       } catch (error) {
-        console.error("Error fetching restaurants:", error);
-        setError("Failed to fetch restaurants. Please try again later.");
+        console.error("Error fetching data:", error);
+        setError("Failed to fetch data. Please try again later.");
       } finally {
         setLoading(false);
       }

@@ -9,7 +9,7 @@ export interface RestaurantData {
     description: string
     createdAt: string
     updatedAt: string
-    tables: Array<any>
+    tables: Array<RestaurantTableData>
 }
 
 export interface CreateRestaurantData {
@@ -32,3 +32,23 @@ export interface GetRestaurantsParams {
     keyword: string;
 }
 
+export interface CreateRestaurantTableData {
+    name: string
+    seats: number
+    restaurantId: number
+}
+
+
+export interface UpdateRestaurantTableData {
+    name: string | undefined
+    seats: number | undefined
+}
+
+export interface RestaurantTableData {
+    id: number
+    name: string
+    seats: number
+    createdAt: string
+    updatedAt: string
+    reservations: Array<any>
+}
