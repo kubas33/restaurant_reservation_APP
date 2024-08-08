@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  deleteRestaurant,
-  getRestaurants,
-} from "../../services/restaurant.service.ts";
+import { deleteTable, getTables } from "../../services/table.service.ts";
 import {
   CButton,
   CButtonGroup,
@@ -19,31 +16,35 @@ import {
   CTableRow,
   CTooltip,
 } from "@coreui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { t } from "i18next";
 import {
-    cibTableau, cilCalendar,
-    cilChevronLeft,
-    cilChevronRight, cilDinner,
-    cilFilter,
-    cilPencil,
-    cilPlus,
-    cilReload,
-    cilSearch,
-    cilTrash,
+  cibTableau,
+  cilCalendar,
+  cilChevronLeft,
+  cilChevronRight,
+  cilDinner,
+  cilFilter,
+  cilPencil,
+  cilPlus,
+  cilReload,
+  cilSearch,
+  cilTrash,
 } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
-import {RestaurantData, RestaurantsResponse} from "../../interfaces/Restaurant.interface.ts";
-
-
+import {
+  RestaurantData,
+  RestaurantTableData,
+  TablesResponse,
+} from "../../interfaces/Restaurant.interface.ts";
 
 const tooltipStyle = {
   display: "inline-block",
   verticalAlign: "middle",
 };
 
-export const RestaurantsTable: React.FC = () => {
-  const [restaurants, setRestaurants] = useState<RestaurantData[]>([]);
+export const TablesTable: React.FC = () => {
+  const [tables, setTables] = useState<RestaurantTableData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
@@ -52,9 +53,10 @@ export const RestaurantsTable: React.FC = () => {
   const currentUser = useSelector((state: any) => state.auth.currentUser);
   const token = currentUser?.token;
   const navigate = useNavigate();
+  let { restaurantId } = useParams();
 
   useEffect(() => {
-    const fetchRestaurants = async () => {
+    const fetchTables = async () => {
       if (!token) {
         setError("No authentication token available");
         setLoading(false);
@@ -63,14 +65,14 @@ export const RestaurantsTable: React.FC = () => {
       setLoading(true);
 
       try {
-        const response = (await getRestaurants({
+        const response = (await getTables({
           token,
           page,
           limit: 10,
           keyword,
-        })) as RestaurantsResponse;
+        })) as TablesResponse;
         if (response.success && Array.isArray(response.data.response)) {
-          setRestaurants(response.data.response);
+          setTables(response.data.response);
         } else {
           console.error("Unexpected response format:", response);
           setError("Received unexpected data format from server");
@@ -83,7 +85,7 @@ export const RestaurantsTable: React.FC = () => {
       }
     };
 
-    fetchRestaurants();
+    fetchTables();
   }, [page, keyword, token]);
 
   const handlePageChange = (newPage: number) => {
@@ -107,7 +109,7 @@ export const RestaurantsTable: React.FC = () => {
   };
 
   const handleCreateClick = () => {
-    navigate("/restaurants/create");
+    navigate(`${resaurantId}/table/create`);
   };
 
   const handleEditClick = (id: number) => {
@@ -129,10 +131,8 @@ export const RestaurantsTable: React.FC = () => {
     }
 
     try {
-      await deleteRestaurant(token, id);
-      setRestaurants((restaurants) =>
-        restaurants.filter((restaurant) => restaurant.id !== id)
-      );
+      await deleteTable(token, id);
+      setTables((tables) => tables.filter((table) => table.id !== id));
     } catch (error) {
       console.error("Error deleting restaurant:", error);
     }
@@ -221,16 +221,16 @@ export const RestaurantsTable: React.FC = () => {
           </CTableRow>
         </CTableHead>
         <CTableBody>
-          {restaurants.map((restaurant) => (
-            <CTableRow key={restaurant.id}>
-              <CTableDataCell>{restaurant.id}</CTableDataCell>
-              <CTableDataCell>{restaurant.name}</CTableDataCell>
-              <CTableDataCell>{restaurant.cuisine}</CTableDataCell>
+          {tables.map((table) => (
+            <CTableRow key={table.id}>
+              <CTableDataCell>{table.id}</CTableDataCell>
+              <CTableDataCell>{table.name}</CTableDataCell>
+              <CTableDataCell>{table.seats}</CTableDataCell>
               <CTableDataCell>
-                {new Date(restaurant.createdAt).toLocaleString()}
+                {new Date(table.createdAt).toLocaleString()}
               </CTableDataCell>
               <CTableDataCell>
-                {new Date(restaurant.updatedAt).toLocaleString()}
+                {new Date(table.updatedAt).toLocaleString()}
               </CTableDataCell>
               <CTableDataCell>
                 <div className="d-flex">
@@ -241,7 +241,7 @@ export const RestaurantsTable: React.FC = () => {
                     <div style={tooltipStyle}>
                       <CButton
                         color="warning"
-                        onClick={() => handleEditClick(restaurant.id)}
+                        onClick={() => handleEditClick(table.id)}
                         className="me-2"
                       >
                         <CIcon icon={cilPencil} />
@@ -255,7 +255,7 @@ export const RestaurantsTable: React.FC = () => {
                     <div style={tooltipStyle}>
                       <CButton
                         color="danger"
-                        onClick={() => handleDeleteClick(restaurant.id)}
+                        onClick={() => handleDeleteClick(table.id)}
                         className="me-2"
                       >
                         <CIcon icon={cilTrash} />
@@ -269,7 +269,7 @@ export const RestaurantsTable: React.FC = () => {
                     <div style={tooltipStyle}>
                       <CButton
                         color="primary"
-                        onClick={() => handleManageTablesClick(restaurant.id)}
+                        onClick={() => handleManageTablesClick(table.id)}
                         className="me-2"
                       >
                         <CIcon icon={cilDinner} />
@@ -283,9 +283,7 @@ export const RestaurantsTable: React.FC = () => {
                     <div style={tooltipStyle}>
                       <CButton
                         color="primary"
-                        onClick={() =>
-                          handleManageReservationsClick(restaurant.id)
-                        }
+                        onClick={() => handleManageReservationsClick(table.id)}
                         className="me-2"
                       >
                         <CIcon icon={cilCalendar} />
