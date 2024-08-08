@@ -7,7 +7,7 @@ import {
   CCol,
   CForm,
   CFormInput,
-  CRow,
+  CRow, CSpinner,
   CTable,
   CTableBody,
   CTableDataCell,
@@ -19,23 +19,13 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { t } from "i18next";
 import {
-  cibTableau,
   cilCalendar,
-  cilChevronLeft,
-  cilChevronRight,
-  cilDinner,
-  cilFilter,
   cilPencil,
-  cilPlus,
-  cilReload,
-  cilSearch,
   cilTrash,
 } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 import {
-  RestaurantData,
-  RestaurantTableData,
-  TablesResponse,
+  RestaurantTableData, TablesResponse,
 } from "../../interfaces/Restaurant.interface.ts";
 
 const tooltipStyle = {
@@ -43,17 +33,17 @@ const tooltipStyle = {
   verticalAlign: "middle",
 };
 
-export const TablesTable: React.FC = () => {
+export const RestaurantTablesTable: React.FC = () => {
   const [tables, setTables] = useState<RestaurantTableData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [keyword, setKeyword] = useState("");
   const currentUser = useSelector((state: any) => state.auth.currentUser);
   const token = currentUser?.token;
   const navigate = useNavigate();
   let { restaurantId } = useParams();
+  const [restaurantName, setRestaurantName] = useState("");
 
   useEffect(() => {
     const fetchTables = async () => {
@@ -65,14 +55,12 @@ export const TablesTable: React.FC = () => {
       setLoading(true);
 
       try {
-        const response = (await getTables({
-          token,
-          page,
-          limit: 10,
-          keyword,
-        })) as TablesResponse;
-        if (response.success && Array.isArray(response.data.response)) {
-          setTables(response.data.response);
+        const id = typeof restaurantId === "string" ? parseInt(restaurantId) : 0;
+        const response = (await getTables(id)) as TablesResponse;
+        if (response.success && Array.isArray(response.data.tables)) {
+          console.log(response.data)
+          setTables(response.data.tables);
+          setRestaurantName(response.data.restaurant.name);
         } else {
           console.error("Unexpected response format:", response);
           setError("Received unexpected data format from server");
@@ -88,41 +76,13 @@ export const TablesTable: React.FC = () => {
     fetchTables();
   }, [page, keyword, token]);
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handlePreviousPage = () => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (page < totalPages) {
-      setPage(page + 1);
-    }
-  };
-
-  const handleAddKeyword = (newKeyword: string) => {
-    setKeyword(newKeyword);
-  };
 
   const handleCreateClick = () => {
-    navigate(`${resaurantId}/table/create`);
+    navigate(`create`);
   };
 
   const handleEditClick = (id: number) => {
-    navigate(`/restaurants/${id}/edit`);
-  };
-
-  const handleFilterApply = () => {
-    setPage(1);
-  };
-
-  const handleFilterReset = () => {
-    setKeyword("");
-    setPage(1);
+    navigate(`${id}/edit`);
   };
 
   const handleDeleteClick = async (id: number) => {
@@ -138,86 +98,45 @@ export const TablesTable: React.FC = () => {
     }
   };
 
-  const handleManageTablesClick = (id: number) => {
-    navigate(`/restaurants/${id}/tables`);
-  };
 
   const handleManageReservationsClick = (id: number) => {
     navigate(`/restaurants/${id}/reservations`);
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+        <div className="d-flex align-items-center">
+          <strong role="status">{t("global.loading")}</strong>
+          <CSpinner className="ms-auto"/>
+        </div>
+    )
   }
 
   if (error) {
     return <div>Error: {error}</div>;
   }
 
-  if (!Array.isArray(restaurants)) {
-    console.error("restaurants is not an array:", restaurants);
+  if (!Array.isArray(tables)) {
+    console.error("tables is not an array:", tables);
     return <div>Error: Invalid data format</div>;
-  }
-
-  if (restaurants.length === 0) {
-    return <div>No restaurants found.</div>;
   }
 
   return (
     <div style={{ padding: "20px" }}>
-      <CForm className="filter-container mb-3">
-        <CRow className="align-items-end">
-          <CCol md="3">
-            <CFormInput
-              type="text"
-              name="keyword"
-              value={keyword}
-              placeholder={"Filtruj po nazwie"}
-              // onChange={handleFilterChange}
-              className="mb-2"
-            />
-          </CCol>
-          <CCol md="3" className="text-md-end">
-            <CTooltip
-              content={t("restaurantTable.applyFilters")}
-              placement="top"
-            >
-              <CButton
-                onClick={handleFilterApply}
-                color="primary"
-                className="me-2 mb-2"
-              >
-                <CIcon icon={cilFilter} />
-              </CButton>
-            </CTooltip>
-            <CTooltip
-              content={t("restaurantTable.resetFilters")}
-              placement="top"
-            >
-              <CButton
-                onClick={handleFilterReset}
-                color="secondary"
-                className="mb-2"
-              >
-                <CIcon icon={cilReload} />
-              </CButton>
-            </CTooltip>
-          </CCol>
-        </CRow>
-      </CForm>
+      <h2>{t("restaurantTablesTable.title")} {restaurantName}</h2>
       <CTable striped>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell>{t("restaurantTable.id")}</CTableHeaderCell>
-            <CTableHeaderCell>{t("restaurantTable.name")}</CTableHeaderCell>
-            <CTableHeaderCell>{t("restaurantTable.cuisine")}</CTableHeaderCell>
+            <CTableHeaderCell>{t("restaurantTablesTable.id")}</CTableHeaderCell>
+            <CTableHeaderCell>{t("restaurantTablesTable.name")}</CTableHeaderCell>
+            <CTableHeaderCell>{t("restaurantTablesTable.seats")}</CTableHeaderCell>
             <CTableHeaderCell>
-              {t("restaurantTable.createdAt")}
+              {t("restaurantTablesTable.createdAt")}
             </CTableHeaderCell>
             <CTableHeaderCell>
-              {t("restaurantTable.updatedAt")}
+              {t("restaurantTablesTable.updatedAt")}
             </CTableHeaderCell>
-            <CTableHeaderCell>{t("restaurantTable.actions")}</CTableHeaderCell>
+            <CTableHeaderCell>{t("restaurantTablesTable.actions")}</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
@@ -235,7 +154,7 @@ export const TablesTable: React.FC = () => {
               <CTableDataCell>
                 <div className="d-flex">
                   <CTooltip
-                    content={t("restaurantTable.editRestaurant")}
+                    content={t("restaurantTablesTable.editTable")}
                     placement="top"
                   >
                     <div style={tooltipStyle}>
@@ -249,7 +168,7 @@ export const TablesTable: React.FC = () => {
                     </div>
                   </CTooltip>
                   <CTooltip
-                    content={t("restaurantTable.deleteRestaurant")}
+                    content={t("restaurantTablesTable.deleteTable")}
                     placement="top"
                   >
                     <div style={tooltipStyle}>
@@ -263,21 +182,7 @@ export const TablesTable: React.FC = () => {
                     </div>
                   </CTooltip>
                   <CTooltip
-                    content={t("restaurantTable.manageTables")}
-                    placement="top"
-                  >
-                    <div style={tooltipStyle}>
-                      <CButton
-                        color="primary"
-                        onClick={() => handleManageTablesClick(table.id)}
-                        className="me-2"
-                      >
-                        <CIcon icon={cilDinner} />
-                      </CButton>
-                    </div>
-                  </CTooltip>
-                  <CTooltip
-                    content={t("restaurantTable.manageReservations")}
+                    content={t("restaurantTablesTable.manageReservations")}
                     placement="top"
                   >
                     <div style={tooltipStyle}>
@@ -290,7 +195,7 @@ export const TablesTable: React.FC = () => {
                       </CButton>
                     </div>
                   </CTooltip>
-                  {/*<CTooltip content={t('restaurantTable.viewUsers')} placement="top">*/}
+                  {/*<CTooltip content={t('restaurantTablesTable.viewUsers')} placement="top">*/}
                   {/*    <div style={tooltipStyle}>*/}
                   {/*        <CButton color="primary" onClick={() => handleViewUsersClick(restaurant.id)}>*/}
                   {/*            <CIcon icon={cilSearch} style={{ color: 'black' }} />*/}
@@ -303,37 +208,10 @@ export const TablesTable: React.FC = () => {
           ))}
         </CTableBody>
       </CTable>
-      <CButtonGroup className="me-3">
-        <CTooltip content={t("restaurantTable.previousPage")} placement="top">
-          <div style={tooltipStyle}>
-            <CButton
-              color="primary"
-              onClick={() => setPage(page - 1)}
-              disabled={page === 1}
-            >
-              <CIcon icon={cilChevronLeft} />
-            </CButton>
-          </div>
-        </CTooltip>
-        <CButton color="secondary" disabled>
-          {page} {t("users.of")} {totalPages}
-        </CButton>
-        <CTooltip content={t("restaurantTable.nextPage")} placement="top">
-          <div style={tooltipStyle}>
-            <CButton
-              color="primary"
-              onClick={() => setPage(page + 1)}
-              disabled={page === totalPages}
-            >
-              <CIcon icon={cilChevronRight} />
-            </CButton>
-          </div>
-        </CTooltip>
-      </CButtonGroup>
-      <CTooltip content={t("restaurantTable.createRestaurant")} placement="top">
+      <CTooltip content={t("restaurantTablesTable.createTable")} placement="top">
         <div style={tooltipStyle}>
           <CButton color="success" onClick={handleCreateClick}>
-            <CIcon icon={cilPlus} />
+            {t("restaurantTablesTable.createTable")}
           </CButton>
         </div>
       </CTooltip>

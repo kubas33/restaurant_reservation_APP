@@ -38,12 +38,12 @@ export const RestaurantForm = () => {
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.auth.currentUser);
   const token = currentUser?.token;
-  const [isCreating, setIsCreating] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleCancel = () => {
-    navigate("/restaurants");
+    navigate("/admin/restaurants");
   };
 
   const getRestaurantData = useCallback(async () => {
@@ -57,8 +57,9 @@ export const RestaurantForm = () => {
 
     try {
       const response = await getRestaurant(token, +id!!);
+      console.log({response})
       const { name, address, phone, cuisine, description } =
-        response.data.response;
+        response.data;
       setName(name);
       setAddress(address);
       setPhone(phone);
@@ -88,20 +89,27 @@ export const RestaurantForm = () => {
     try {
       if (!isEditing) {
         try {
+          setIsSaving(true);
           await createRestaurant(token, restaurantData);
         } catch {
           console.error(error);
+        } finally {
+          setIsSaving(false);
+          navigate("/admin/restaurants");
         }
       } else {
         try {
           await updateRestaurant(token, +id!!, restaurantData);
+          showToast({
+            type: "success",
+            message: t('restaurantForm.messages.updateSuccess') as string,
+          })
         } catch {
           console.error(error);
         } finally {
-          setIsEditing(false);
+          setIsSaving(false);
         }
       }
-      navigate("/restaurants");
     } catch (error) {
       console.error("Error saving restaurant:", error);
     }
@@ -226,9 +234,9 @@ export const RestaurantForm = () => {
                   className="btn-sm"
                   type="submit"
                   color="success"
-                  disabled={isCreating || isEditing}
+                  disabled={isSaving}
                 >
-                  {isCreating || isEditing ? (
+                  {isSaving ? (
                     <span
                       className="spinner-border spinner-border-sm"
                       role="status"

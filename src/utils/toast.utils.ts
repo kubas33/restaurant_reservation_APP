@@ -2,7 +2,7 @@ import {toast, ToastOptions, ToastContent, TypeOptions} from 'react-toastify';
 
 interface ShowToastOptions {
     type: TypeOptions;
-    message: ToastContent;
+    message: ToastContent | string;
 }
 
 export const showToast = ({ type, message }: ShowToastOptions) => {

@@ -1,4 +1,4 @@
-import {ApiResponse} from "./Common.interface.ts";
+import {ApiResponse, SimpleApiResponse} from "./Common.interface.ts";
 
 export interface RestaurantData {
     id: number
@@ -10,6 +10,15 @@ export interface RestaurantData {
     createdAt: string
     updatedAt: string
     tables: Array<RestaurantTableData>
+}
+
+export interface SimpleRestaurantData {
+    id: number
+    name: string
+    address: string
+    phone: string
+    cuisine: string
+    description: string
 }
 
 export interface CreateRestaurantData {
@@ -52,3 +61,12 @@ export interface RestaurantTableData {
     updatedAt: string
     reservations: Array<any>
 }
+
+export type TablesResponse =
+    {
+        data: {
+            restaurant: SimpleRestaurantData
+            tables: RestaurantTableData[]
+            },
+        success: boolean
+    }

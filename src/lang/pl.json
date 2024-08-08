@@ -256,7 +256,10 @@
       "address": "Adres",
       "phone": "Telefon kontaktowy",
       "createRestaurant": "Utwórz restaurację",
-      "updateRestaurant": "Zaktualizuj restaurację"
+      "updateRestaurant": "Zaktualizuj restaurację",
+      "messages": {
+        "updateSuccess": "Restauracja została zaktualizowana"
+      }
     },
     "restaurantTable": {
       "id": "ID",
@@ -278,6 +281,22 @@
       "manageTables": "Zarządzaj stolikami",
       "manageReservations": "Zarządzaj rezerwacjami"
     },
+  "restaurantTablesTable": {
+    "id": "ID",
+    "title": "Lista stolików",
+    "name": "Nazwa",
+    "seats": "Ilość miejsc",
+    "createdAt": "Utworzono",
+    "updatedAt": "Zaktualizowano",
+    "actions": "Akcje",
+    "editTable": "Edytuj stolik",
+    "deleteTable": "Usuń stolik",
+    "previousPage": "Poprzednia strona",
+    "nextPage": "Następna strona",
+    "createTable": "Dodaj stolik",
+    "loading": "Ładowanie...",
+    "manageReservations": "Zarządzaj rezerwacjami"
+  },
     "projectPage": {
       "unauthorized": "Nieautoryzowany",
       "noPermission": "Nie masz uprawnień do dostępu do tej strony.",
@@ -320,7 +339,8 @@
         "create": "Utwórz",
         "update": "Aktualizuj",
         "cancel": "Anuluj"
-      }
+      },
+      "loading": "Ładowanie..."
      }
   }
   

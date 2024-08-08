@@ -281,6 +281,22 @@
       "manageTables": "Manage Tables",
       "manageReservations": "Manage Reservations"
     },
+  "restaurantTablesTable": {
+    "id": "ID",
+    "title": "Table List",
+    "name": "Name",
+    "seats": "Number of Seats",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "actions": "Actions",
+    "editTable": "Edit Table",
+    "deleteTable": "Delete Table",
+    "previousPage": "Previous Page",
+    "nextPage": "Next Page",
+    "createTable": "Create Table",
+    "loading": "Loading...",
+    "manageReservations": "Manage Reservations"
+  },
     "restaurantPage": {
       "unauthorized": "Unauthorized",
       "noPermission": "You do not have permission to access this page.",

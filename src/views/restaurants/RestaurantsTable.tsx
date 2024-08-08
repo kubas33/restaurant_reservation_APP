@@ -106,11 +106,11 @@ export const RestaurantsTable: React.FC = () => {
   };
 
   const handleCreateClick = () => {
-    navigate("/restaurants/create");
+    navigate("/admin/restaurants/create");
   };
 
   const handleEditClick = (id: number) => {
-    navigate(`/restaurants/${id}/edit`);
+    navigate(`/admin/restaurants/${id}/edit`);
   };
 
   const handleFilterApply = () => {
@@ -137,12 +137,12 @@ export const RestaurantsTable: React.FC = () => {
     }
   };
 
-  const handleManageTablesClick = (id: number) => {
-    navigate(`/restaurants/${id}/tables`);
+  const handleManageTablesClick = (restaurantId: number) => {
+    navigate(`/admin/restaurants/${restaurantId}/tables`);
   };
 
-  const handleManageReservationsClick = (id: number) => {
-    navigate(`/restaurants/${id}/reservations`);
+  const handleManageReservationsClick = (restaurantId: number) => {
+    navigate(`/admin/restaurants/${restaurantId}/reservations`);
   };
 
   if (loading) {

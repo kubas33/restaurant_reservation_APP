@@ -34,6 +34,7 @@ const MainNavigation = ({children}) => {
             return res;
         },
         async (error) => {
+            console.log(error);
             const status = error.response.status;
 
             if (error.response.config.url.toString().includes('login')) {

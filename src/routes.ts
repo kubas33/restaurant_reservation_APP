@@ -2,6 +2,8 @@ import React from 'react'
 import {RestaurantsList} from "./views/restaurants/RestaurantsList.tsx";
 import {RestaurantsAdminPage} from "./views/restaurants/RestaurantsAdminPage.tsx";
 import {RestaurantForm} from "./components/restaurant/RestaurantForm.tsx";
+import {RestaurantsTable} from "./views/restaurants/RestaurantsTable.tsx";
+import {RestaurantTablesTable} from "./views/restaurants/RestaurantTablesTable.tsx";
 
 
 // const RolesFormAuth = React.lazy(() => import('./views/dashboard/roles/RolesFormAuth.jsx'))
@@ -33,7 +35,8 @@ const routes = [
     // { path: '/roles/edit/:id', exact: true, name: 'Edit Role', element: RolesFormAuth },
     { path: '/admin/restaurants', exact: true, name: 'Admin Restaurants', element: RestaurantsAdminPage },
     {path: '/admin/restaurants/create', exact: true, name: 'Create Restaurant', element: RestaurantForm},
-    { path: '/admin/restaurants/edit/:id', exact: true, name: 'Edit Restaurant', element: RestaurantForm },
+    { path: '/admin/restaurants/:id/edit', exact: true, name: 'Edit Restaurant', element: RestaurantForm },
+    { path: '/admin/restaurants/:restaurantId/tables', exact: true, name: 'Restaurant Tables', element: RestaurantTablesTable },
     // {path: '/settings',exact: true, name: 'Settings', element: Settings},
     // {path: '/projects',exact: true, name: 'Projects', element: Projects},
     // {path: '/addticket',exact: true, name: 'AddTicket', element: AddTicketAuth},

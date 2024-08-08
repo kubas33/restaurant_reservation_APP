@@ -16,3 +16,8 @@ export interface ApiResponse<T> {
     success: boolean;
 }
 
+export interface SimpleApiResponse<T> {
+    data: T;
+    success: boolean;
+}
+
