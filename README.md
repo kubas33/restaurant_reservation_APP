@@ -1,30 +1,22 @@
-# React + TypeScript + Vite
+# Aplikacja do Zarządzania Restauracjami
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Opis
 
-Currently, two official plugins are available:
+Aplikacja do zarządzania restauracjami oraz tworzenia rezerwacji stolików w restauracjach. Umożliwia użytkownikom rejestrację, logowanie oraz przeglądanie listy restauracji. Panel administracyjny pozwala na dodawanie i edytowanie restauracji oraz stolików.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Działające funkcjonalności
 
-## Expanding the ESLint configuration
+- **Rejestracja:** Umożliwia użytkownikom zakładanie nowych kont.
+- **Logowanie:** Umożliwia użytkownikom logowanie się na swoje konta.
+- **Strona główna:** Wyświetla listę restauracji.
+- **Panel administracyjny:**
+    - Dodawanie i edytowanie restauracji.
+    - Dodawanie i edytowanie stolików.
+    - Dodawanie i edytowanie użytkowników.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Konto Administratora
 
-- Configure the top-level `parserOptions` property like this:
+Dla celów testowych, dostępne jest konto administratora:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **Email:** `admin@gmail.com`
+- **Hasło:** `password`
