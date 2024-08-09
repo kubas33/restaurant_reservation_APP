@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  CreateRestaurantTableData,
   RestaurantData,
   RestaurantTableData,
 } from "../interfaces/Restaurant.interface";
@@ -8,7 +9,7 @@ const API_URL = `${import.meta.env.VITE_API_URL}/restaurant`;
 
 const createTable = async (
   restaurantId: RestaurantData["id"],
-  tableData: RestaurantTableData
+  tableData: CreateRestaurantTableData
 ) => {
   try {
     const response = await axios.post(
@@ -50,7 +51,7 @@ const getById = async (
 const updateTable = async (
   restaurantId: RestaurantData["id"],
   tableId: RestaurantTableData["id"],
-  tableData: RestaurantTableData
+  tableData: CreateRestaurantTableData
 ) => {
   try {
     const response = await axios.put(

@@ -13,10 +13,10 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
-  createTable as createTable,
-  getRestaurant,
-  updateTable as updateTable,
-} from "../../services/restaurant.service";
+  createTable,
+  getById,
+  updateTable,
+} from "../../services/table.service";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import error = toast.error;
@@ -27,11 +27,13 @@ const tooltipStyle = {
   verticalAlign: "middle",
 };
 
-export const RestaurantForm = () => {
-  const { id } = useParams();
-  const { t } = useTranslation();
+export const RestaurantTableForm = () => {
+  const { id: idString, restaurantId: restaurantIdString } = useParams();
+  const id = Number(idString);
+  const restaurantId = Number(restaurantIdString);
+
   const [name, setName] = useState("");
-  const [seats, setSeats] = useState("");
+  const [seats, setSeats] = useState(0);
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.auth.currentUser);
   const token = currentUser?.token;
@@ -53,10 +55,12 @@ export const RestaurantForm = () => {
     setIsEditing(true);
 
     try {
-      const response = await getTable(token, +id!!);
-      const { name, seats } = response.data.response;
-      setName(name);
-      setSeats(seats);
+      if (id && restaurantId) {
+        const response = await getById(restaurantId, id);
+        const { name, seats } = response.data.response;
+        setName(name);
+        setSeats(seats);
+      }
     } catch (error) {
       console.error("Failed to fetch table data:", error);
       showToast({
@@ -146,8 +150,8 @@ export const RestaurantForm = () => {
                 <CFormInput
                   type="number"
                   id="seats"
-                  value={seats}
-                  onChange={(e) => setSeats(e.target.value)}
+                  value={+seats}
+                  onChange={(e) => setSeats(+e.target.value)}
                   required
                 />
               </li>
