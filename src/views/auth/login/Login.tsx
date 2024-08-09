@@ -66,9 +66,6 @@ const Login = () => {
           email: data.user?.email,
           name: data.user?.name,
           token: data.token,
-          // avatarUrl: data.avatarUrl,
-          // permissions: data.permissions,
-          // language: data.defaultLanguage,
         };
         console.log(data);
         console.log(currentUser);
@@ -93,9 +90,6 @@ const Login = () => {
               <CCard className="p-4">
                 <CCardBody>
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="text-center mb-4">
-                      <img src={logo} alt="Logo firmy" />
-                    </div>
                     <h1 className="text-center h1">Logowanie</h1>
                     <p className="text-body-secondary text-center">
                       Zaloguj się na swoje konto
@@ -146,11 +140,6 @@ const Login = () => {
                           Zaloguj się
                         </CButton>
                       </CCol>
-                      {/* <CCol xs={6} className="text-right">
-                                                <CButton color="link" className="px-0">
-                                                    {t('login.forgotPassword')}
-                                                </CButton>
-                                            </CCol> */}
                     </CRow>
                   </form>
                 </CCardBody>

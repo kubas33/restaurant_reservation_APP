@@ -17,7 +17,7 @@ import {
   getRestaurant,
   updateRestaurant,
 } from "../../services/restaurant.service";
-import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 import { toast } from "react-toastify";
 import error = toast.error;
 import { showToast } from "../../utils";
@@ -29,7 +29,6 @@ const tooltipStyle = {
 
 export const RestaurantForm = () => {
   const { id } = useParams();
-  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
@@ -92,6 +91,10 @@ export const RestaurantForm = () => {
           setIsSaving(true);
           await createRestaurant(token, restaurantData);
         } catch {
+          showToast({
+            type: "error",
+            message: t('global.messages.generalError') as string,
+          })
           console.error(error);
         } finally {
           setIsSaving(false);

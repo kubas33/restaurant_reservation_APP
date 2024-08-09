@@ -20,9 +20,10 @@ import {useForm} from "react-hook-form";
 import * as yup from "yup";
 import {showToast} from "../../../utils";
 import AuthService from "../../../services/auth.service.ts";
+import {t} from "i18next";
 
 const schema = yup.object().shape({
-  username: yup.string().required("validation.required"),
+  name: yup.string().required("validation.required"),
   email: yup.string().required("validation.required").email("validation.email"),
   password: yup.string().required("validation.required"),
 });
@@ -75,11 +76,11 @@ const Register = () => {
                       <CIcon icon={cilUser} />
                     </CInputGroupText>
                     <CFormInput
-                      placeholder="Nazwa użytkownika"
-                      autoComplete="username"
-                      onChange={register("username").onChange}
-                      invalid={errors.username != null}
-                      feedbackInvalid={errors.username?.message}
+                        placeholder="Nazwa użytkownika"
+                        autoComplete="name"
+                        {...register("name")}
+                        invalid={!!errors.name}
+                        feedbackInvalid={t(errors.name?.message)}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
@@ -87,8 +88,9 @@ const Register = () => {
                     <CFormInput
                         placeholder="Email"
                         autoComplete="email"
+                        {...register("email")}
                         invalid={errors.email != null}
-                        feedbackInvalid={errors.email?.message}
+                        feedbackInvalid={t(errors.email?.message)}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
@@ -99,24 +101,16 @@ const Register = () => {
                       type="password"
                       placeholder="Hasło"
                       autoComplete="new-password"
+                      {...register("password")}
                       invalid={errors.password != null}
-                      feedbackInvalid={errors.password?.message}
-                    />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
-                    </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="Powtórz hasło"
-                      autoComplete="new-password"
-                      invalid={errors.password != null}
-                      feedbackInvalid={errors.password?.message}
+                      feedbackInvalid={t(errors.password?.message)}
                     />
                   </CInputGroup>
                   <div className="d-grid">
-                    <CButton color="success">Załóż konto</CButton>
+                    <CButton color="success"
+                             type="submit">
+                      Załóż konto
+                    </CButton>
                   </div>
                 </CForm>
                 <CRow className={"py-3"}>

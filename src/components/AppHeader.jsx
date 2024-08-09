@@ -92,44 +92,44 @@ export const AppHeader = React.memo(() => {
         </CHeaderToggler>
         <CHeaderNav className="d-none d-md-flex">
           <CNavItem>
-            <CNavLink to="/dashboard" as={NavLink}>
-              {t("appHeader.dashboard")}
+            <CNavLink to="/" as={NavLink}>
+              {t("nav.dashboard")}
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-auto"></CHeaderNav>
         <CHeaderNav>
-          <li className="nav-item py-1">
-            <div className="vr h-100 mx-2 text-body text-opacity-75"></div>
-          </li>
+          {/*<li className="nav-item py-1">*/}
+          {/*  <div className="vr h-100 mx-2 text-body text-opacity-75"></div>*/}
+          {/*</li>*/}
 
-          <CDropdown variant="nav-item" placement="bottom-end">
-            <CDropdownToggle caret={false}>
-              <span>
-                <CIcon icon={cilLanguage} size="lg" /> {language}
-              </span>
-            </CDropdownToggle>
-            <CDropdownMenu>
-              <CDropdownItem
-                active={language === "en"}
-                className="d-flex align-items-center"
-                as="button"
-                type="button"
-                onClick={() => handleLanguageChange("en")}
-              >
-                English
-              </CDropdownItem>
-              <CDropdownItem
-                active={language === "pl"}
-                className="d-flex align-items-center"
-                as="button"
-                type="button"
-                onClick={() => handleLanguageChange("pl")}
-              >
-                Polski
-              </CDropdownItem>
-            </CDropdownMenu>
-          </CDropdown>
+          {/*<CDropdown variant="nav-item" placement="bottom-end">*/}
+          {/*  <CDropdownToggle caret={false}>*/}
+          {/*    <span>*/}
+          {/*      <CIcon icon={cilLanguage} size="lg" /> {language}*/}
+          {/*    </span>*/}
+          {/*  </CDropdownToggle>*/}
+          {/*  <CDropdownMenu>*/}
+          {/*    <CDropdownItem*/}
+          {/*      active={language === "en"}*/}
+          {/*      className="d-flex align-items-center"*/}
+          {/*      as="button"*/}
+          {/*      type="button"*/}
+          {/*      onClick={() => handleLanguageChange("en")}*/}
+          {/*    >*/}
+          {/*      English*/}
+          {/*    </CDropdownItem>*/}
+          {/*    <CDropdownItem*/}
+          {/*      active={language === "pl"}*/}
+          {/*      className="d-flex align-items-center"*/}
+          {/*      as="button"*/}
+          {/*      type="button"*/}
+          {/*      onClick={() => handleLanguageChange("pl")}*/}
+          {/*    >*/}
+          {/*      Polski*/}
+          {/*    </CDropdownItem>*/}
+          {/*  </CDropdownMenu>*/}
+          {/*</CDropdown>*/}
 
           <li className="nav-item py-1">
             <div className="vr h-100 mx-2 text-body text-opacity-75"></div>

@@ -40,11 +40,11 @@ const AppHeaderDropdown = () => {
         <CDropdownHeader className="bg-body-secondary fw-semibold mb-2">
           {t("appHeader.account")}
         </CDropdownHeader>
-        <CDropdownItem onClick={() => navigate("/profile")}>
-          <CIcon icon={cilUser} className="me-2" />
-          {t("appHeader.profile")}
-        </CDropdownItem>
-        <CDropdownDivider />
+        {/*<CDropdownItem onClick={() => navigate("/profile")}>*/}
+        {/*  <CIcon icon={cilUser} className="me-2" />*/}
+        {/*  {t("appHeader.profile")}*/}
+        {/*</CDropdownItem>*/}
+        {/*<CDropdownDivider />*/}
         <CDropdownItem as="button" onClick={() => handleLogout()}>
           <CIcon icon={cilLockLocked} className="me-2" />
           {t("appHeader.logOut")}

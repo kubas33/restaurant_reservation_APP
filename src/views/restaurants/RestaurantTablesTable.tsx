@@ -78,11 +78,19 @@ export const RestaurantTablesTable: React.FC = () => {
 
 
   const handleCreateClick = () => {
-    navigate(`create`);
+    navigate(`create`, {
+      state: {
+        restaurantName
+      }
+    });
   };
 
   const handleEditClick = (id: number) => {
-    navigate(`${id}/edit`);
+    navigate(`${id}/edit`,
+        {
+          state: {
+            restaurantName
+          }});
   };
 
   const handleDeleteClick = async (id: number) => {
@@ -130,11 +138,9 @@ export const RestaurantTablesTable: React.FC = () => {
             <CTableHeaderCell>{t("restaurantTablesTable.id")}</CTableHeaderCell>
             <CTableHeaderCell>{t("restaurantTablesTable.name")}</CTableHeaderCell>
             <CTableHeaderCell>{t("restaurantTablesTable.seats")}</CTableHeaderCell>
-            <CTableHeaderCell>
-              {t("restaurantTablesTable.createdAt")}
+            <CTableHeaderCell>{t("restaurantTablesTable.createdAt")}
             </CTableHeaderCell>
-            <CTableHeaderCell>
-              {t("restaurantTablesTable.updatedAt")}
+            <CTableHeaderCell>{t("restaurantTablesTable.updatedAt")}
             </CTableHeaderCell>
             <CTableHeaderCell>{t("restaurantTablesTable.actions")}</CTableHeaderCell>
           </CTableRow>

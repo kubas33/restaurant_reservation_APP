@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { useSelector } from "react-redux";
 import {
   deleteRestaurant,
@@ -10,7 +10,7 @@ import {
   CCol,
   CForm,
   CFormInput,
-  CRow,
+  CRow, CSpinner,
   CTable,
   CTableBody,
   CTableDataCell,
@@ -81,8 +81,8 @@ export const RestaurantsTable: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchRestaurants();
+
   }, [page, keyword, token]);
 
   const handlePageChange = (newPage: number) => {
@@ -139,14 +139,21 @@ export const RestaurantsTable: React.FC = () => {
 
   const handleManageTablesClick = (restaurantId: number) => {
     navigate(`/admin/restaurants/${restaurantId}/tables`);
+
   };
 
   const handleManageReservationsClick = (restaurantId: number) => {
-    navigate(`/admin/restaurants/${restaurantId}/reservations`);
+    // navigate(`/admin/restaurants/${restaurantId}/reservations`);
+    window.alert('Funkcjonalność w budowie :(');
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+        <div className="d-flex align-items-center">
+          <strong role="status">{t("global.loading")}</strong>
+          <CSpinner className="ms-auto"/>
+        </div>
+    )
   }
 
   if (error) {
@@ -156,10 +163,6 @@ export const RestaurantsTable: React.FC = () => {
   if (!Array.isArray(restaurants)) {
     console.error("restaurants is not an array:", restaurants);
     return <div>Error: Invalid data format</div>;
-  }
-
-  if (restaurants.length === 0) {
-    return <div>No restaurants found.</div>;
   }
 
   return (
@@ -172,7 +175,7 @@ export const RestaurantsTable: React.FC = () => {
               name="keyword"
               value={keyword}
               placeholder={"Filtruj po nazwie"}
-              // onChange={handleFilterChange}
+              onChange={(e) => handleAddKeyword(e.target.value)}
               className="mb-2"
             />
           </CCol>
@@ -210,11 +213,9 @@ export const RestaurantsTable: React.FC = () => {
             <CTableHeaderCell>{t("restaurantTable.id")}</CTableHeaderCell>
             <CTableHeaderCell>{t("restaurantTable.name")}</CTableHeaderCell>
             <CTableHeaderCell>{t("restaurantTable.cuisine")}</CTableHeaderCell>
-            <CTableHeaderCell>
-              {t("restaurantTable.createdAt")}
+            <CTableHeaderCell>{t("restaurantTable.createdAt")}
             </CTableHeaderCell>
-            <CTableHeaderCell>
-              {t("restaurantTable.updatedAt")}
+            <CTableHeaderCell>{t("restaurantTable.updatedAt")}
             </CTableHeaderCell>
             <CTableHeaderCell>{t("restaurantTable.actions")}</CTableHeaderCell>
           </CTableRow>

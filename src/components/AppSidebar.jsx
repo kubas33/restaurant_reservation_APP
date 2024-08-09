@@ -35,12 +35,6 @@ const AppSidebar = () => {
             onVisibleChange={(visible) => dispatch(themeActions.showSidebar(visible))}
         >
             <CSidebarHeader className="border-bottom">
-                <CSidebarBrand to="/" className="d-flex flex-column align-items-center">
-                    {/*<img className="sidebar-brand-full" src="/Deal_IT_text_white_big.png" alt="Logo" height={16}/>*/}
-                    {/*<img className="sidebar-brand-full" src="/service-desk-high-resolution-logo-transparent.png" alt="Logo" height={16}/>*/}
-                    {/* <CIcon customClassName="sidebar-brand-full" icon={logo} height={32} />
-                    <CIcon customClassName="sidebar-brand-narrow" icon={sygnet} height={32} /> */}
-                </CSidebarBrand>
                 <CCloseButton
                     className="d-lg-none"
                     dark

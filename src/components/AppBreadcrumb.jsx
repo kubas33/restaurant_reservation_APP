@@ -9,7 +9,11 @@ const AppBreadcrumb = () => {
   const currentLocation = useLocation().pathname;
 
   const getRouteName = (pathname, routes) => {
-    const currentRoute = routes.find((route) => route.path === pathname);
+    const currentRoute = routes.find((route) => {
+      // Konwertuj ścieżkę trasy na wyrażenie regularne
+      const routeRegex = new RegExp('^' + route.path.replace(/:[^\s/]+/g, '[^/]+') + '$');
+      return routeRegex.test(pathname);
+    });
     return currentRoute ? currentRoute.name : false;
   };
 
@@ -35,16 +39,18 @@ const AppBreadcrumb = () => {
     <CBreadcrumb className="my-0">
       <CBreadcrumbItem href="/">Home</CBreadcrumbItem>
       {breadcrumbs.map((breadcrumb, index) => {
-        return (
-          <CBreadcrumbItem
-            {...(breadcrumb.active
-              ? { active: true }
-              : { href: breadcrumb.pathname })}
-            key={index}
-          >
-            {breadcrumb.name}
-          </CBreadcrumbItem>
-        );
+        if (breadcrumb.name !== "Home"){
+          return (
+            <CBreadcrumbItem
+              {...(breadcrumb.active
+                ? { active: true }
+                : { href: breadcrumb.pathname })}
+              key={index}
+            >
+              {breadcrumb.name}
+            </CBreadcrumbItem>
+          );
+        }
       })}
     </CBreadcrumb>
   );

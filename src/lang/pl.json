@@ -24,11 +24,7 @@
       "administration": "Administracja",
       "users": "Użytkownicy",
       "roles": "Role",
-      "restaurants": "Restauracje",
-      "tickets": "Zgłoszenia",
-      "myTickets": "Moje zgłoszenia",
-      "addTicket": "Dodaj zgłoszenie",
-      "myCompleteTickets": "Zakończone zgłoszenia"
+      "restaurants": "Restauracje"
     },
     "roles": {
       "title": "Role",
@@ -83,10 +79,10 @@
       "deleteTickets": "Usuń zgłoszenia",
       "updateTickets": "Aktualizuj zgłoszenia",
       "updateProjectsUsers": "Aktualizuj użytkowników projektu"
-  
     },
     "users": {
       "filterByName": "Filtruj po nazwie...",
+      "id": "ID",
       "name": "Nazwa",
       "email": "E-mail",
       "roles": "Role",
@@ -99,7 +95,16 @@
       "addUser": "Dodaj użytkownika",
       "unauthorized": "Nieautoryzowany",
       "unauthorizedMessage": "Nie masz uprawnień do dostępu do tej strony.",
-      "of":"z"
+      "of":"z",
+      "messages": {
+        "userCreated": "Użytkownik został utworzony!",
+        "userUpdated": "Użytkownik został zaktualizowany!",
+        "userDeleted": "Użytkownik został usunięty!",
+        "confirmDelete": "Czy na pewno chcesz usunąć tego użytkownika?",
+        "errors": {
+          "delete": "Wystąpił błąd podczas usuwania użytkownika. Spróbuj ponownie"
+        }
+      }
     },
     "profile": {
       "userProfile": "Profil Użytkownika",
@@ -128,68 +133,12 @@
       "newPasswordLabel": "Nowe hasło",
       "confirmNewPasswordLabel": "Potwierdź nowe hasło",
       "saveButton": "Zapisz",
-      "roleTooltip": "Rola",
-      "selectLanguage": "Wybierz język",
-      "defaultLanguageLabel": "Język",
-      "selectRoleError": "Wybierz przynajmniej jedną rolę",
-      "Create": "Stwórz nowego użytkownika",
-      "Edit": "Edytuj nowego użytkownika"
+      "create": "Stwórz nowego użytkownika",
+      "edit": "Edytuj użytkownika"
     },
     "usersFormAuth": {
       "authorizationError": "Błąd autoryzacji",
       "accessDenied": "Nie masz dostępu do tej strony"
-    },
-    "addTicket": {
-      "titleTooltip": "Tytuł zgłoszenia",
-      "titleLabel": "Tytuł",
-      "projectTooltip": "Projekt zgłoszenia",
-      "projectLabel": "Projekt",
-      "selectProject": "Wybierz projekt",
-      "descriptionTooltip": "Opis zgłoszenia",
-      "descriptionLabel": "Opis",
-      "priorityTooltip": "Priorytet zgłoszenia",
-      "priorityLabel": "Priorytet",
-      "selectPriority": "Wybierz priorytet",
-      "low": "Niski",
-      "medium": "Średni",
-      "high": "Wysoki",
-      "critical": "Krytyczny",
-      "ticketTypeTooltip": "Typ zgłoszenia",
-      "ticketTypeLabel": "Typ zgłoszenia",
-      "selectTicketType": "Wybierz typ zgłoszenia",
-      "bug": "Błąd",
-      "newFeature": "Nowa funkcjonalność",
-      "improvement": "Ulepszenie",
-      "task": "Zadanie",
-      "occurredAtTooltip": "Data wystąpienia zgłoszenia",
-      "occurredAtLabel": "Data wystąpienia",
-      "attachmentsTooltip": "Załączniki zgłoszenia",
-      "attachmentsLabel": "Załączniki",
-      "submitTooltip": "Dodaj zgłoszenie",
-      "submitButton": "Dodaj zgłoszenie",
-      "emptyDescriptionError": "Opis zgłoszenia jest wymagany"
-    },
-    "addTicketAuth": {
-      "unauthorizedTitle": "Brak autoryzacji",
-      "unauthorizedMessage": "Nie masz dostępu do tej części aplikacji",
-      "addTicketTitle": "Dodaj zgłoszenie"
-    },
-    "loading": "Ładowanie...",
-    "applyFilters": "Zastosuj filtry",
-    "resetFilters": "Zresetuj filtry",
-    "tickets": {
-      "id": "ID",
-      "title": "Tytuł",
-      "priority": "Priorytet",
-      "status": "Status",
-      "ticket_type": "Typ zgłoszenia",
-      "occurred_at": "Wystąpiło o",
-      "project": "Projekt",
-      "submittedBy": "Zgłoszone przez",
-      "actions": "Akcje",
-      "viewDetails": "Zobacz szczegóły",
-      "created_at": "Utworzono",
-      "completedTickets": "Zakończone zgłoszenia"
     },
     "filterBy": {
       "id": "Filtruj po ID",
@@ -199,56 +148,7 @@
       "ticket_type": "Filtruj po typie zgłoszenia",
       "occurred_at": "Filtruj po dacie wystąpienia"
     },
-    "unknownProject": "Nieznany projekt",
-    "unknownUser": "Nieznany użytkownik",
-    "previousPage": "Poprzednia strona",
-    "nextPage": "Następna strona",
-    "page": "Strona",
-    "noAuthorization": "Brak autoryzacji",
-    "noAccess": "Nie masz dostępu do tej części aplikacji",
-    "ticketss": "Zgłoszenia",
-    
-    "ticketNotFound": "Nie znaleziono zgłoszenia",
-    "ticketDetails": "Szczegóły zgłoszenia",
-    "acceptTicket": "Przyjmij zgłoszenie",
-    "rejectTicket": "Odrzuć zgłoszenie",
-    "editStatus": "Edytuj status",
-    "chooseStatus": "Wybierz status",
-    "inVerification": "W trakcie weryfikacji",
-    "inProgress": "W trakcie realizacji",
-    "waitingForClient": "Oczekiwanie na odpowiedź klienta",
-    "completed": "Zrealizowane",
-    "save": "Zapisz",
-    "title": "Tytuł",
-    "priority": "Priorytet",
-    "status": "Status",
-    "type": "Typ",
-    "occurredAt": "Data wystąpienia",
-    "description": "Opis",
-    "projectName": "Nazwa projektu",
-    "submittedBy": "Zgłoszone przez",
-    "attachments": "Załączniki",
-    "noAttachments": "Brak załączników",
-    "history": "Historia",
-    "noHistory": "Brak historii",
-    "comments": "Komentarze",
-    "newComment": "Nowy komentarz",
-    "addComment": "Dodaj komentarz",
-    "noComments": "Brak komentarzy",
-    "commentContentRequired": "Treść komentarza jest wymagana",
-    
-    "rejectionReasonPrompt": "Proszę podać powód odrzucenia:",
-    "rejectionReasonRequired": "Powód odrzucenia jest wymagany",
-    "ticketAccepted": "Zgłoszenie przyjęte",
-    "errorFetchingTicketDetails": "Błąd podczas pobierania szczegółów zgłoszenia",
-    "errorFetchingComments": "Błąd podczas pobierania komentarzy",
-    "errorFetchingHistory": "Błąd podczas pobierania historii zgłoszenia",
-    "errorFetchingUserData": "Błąd podczas pobierania danych użytkownika",
-    "errorUpdatingTicketStatus": "Błąd podczas aktualizacji statusu zgłoszenia",
-    "errorRejectingTicket": "Błąd podczas odrzucania zgłoszenia",
-    "errorCreatingComment": "Błąd podczas tworzenia komentarza",
-    "errorDownloadingAttachment": "Błąd podczas pobierania załącznika",
-    "errorDownloadingCommentAttachment": "Błąd podczas pobierania załącznika do komentarza",
+
     "restaurantForm": {
       "restaurantName": "Nazwa Restauracji",
       "cuisine": "Rodzaj kuchni",
@@ -297,50 +197,25 @@
     "loading": "Ładowanie...",
     "manageReservations": "Zarządzaj rezerwacjami"
   },
-    "projectPage": {
-      "unauthorized": "Nieautoryzowany",
-      "noPermission": "Nie masz uprawnień do dostępu do tej strony.",
-      "title": "Restauracje"
+  "restaurantTableForm": {
+    "createTable": "Utwórz stolik",
+    "updateTable": "Aktualizuj stolik ",
+    "tableName": "Nazwa stolika",
+    "seats": "Ilość miejsc",
+    "messages": {
+      "updateSuccess": "Stolik został zaktualizowany"
+    }
+  },
+  "global" : {
+    "buttons": {
+      "create": "Utwórz",
+      "update": "Aktualizuj",
+      "cancel": "Anuluj"
     },
-    "projectUsersTable": {
-      "id": "ID",
-      "name": "Nazwa",
-      "role": "Rola",
-      "action": "Akcja",
-      "client": "Klient",
-      "teamMember": "Członek zespołu",
-      "save": "Zapisz",
-      "cancel": "Anuluj",
-      "editUser": "Edytuj użytkownika",
-      "unassignUser": "Usuń użytkownika",
-      "addUser": "Dodaj użytkownika",
-      "loading": "Ładowanie..."
+    "messages": {
+      "generalError": "Upss... Coś poszło nie tak. Spróbuj ponownie."
     },
-    "projectUserAssignForm": {
-      "selectUser": "Wybierz użytkownika",
-      "selectedUser": "Wybrany użytkownik",
-      "selectRole": "Wybierz rolę",
-      "assignUser": "Przypisz użytkownika do projektu",
-      "user": "Użytkownik",
-      "role": "Rola",
-      "teamMember": "Członek zespołu",
-      "client": "Klient",
-      "fillAllFields": "Proszę wypełnić wszystkie pola"
-    },
-    "rejected": "Odrzucone",
-    "new": "Nowe",
-    "choose": "Wybierz",
-    "attachment": "Załącznik",
-    "noData": "Brak podanej daty",
-    "acceptedProcess": "Przyjęte do realizacji",
-    "completionTime": "Czas realizacji",
-    "global" : {
-      "buttons": {
-        "create": "Utwórz",
-        "update": "Aktualizuj",
-        "cancel": "Anuluj"
-      },
-      "loading": "Ładowanie..."
-     }
+    "loading": "Ładowanie..."
+   }
   }
   

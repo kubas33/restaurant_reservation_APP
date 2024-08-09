@@ -2,14 +2,13 @@
 // import AppFooter from "./AppFooter";
 import { AppContent } from "./AppContent.jsx";
 import { AppHeader } from "./AppHeader.jsx";
-import AppBreadcrumb from "./AppBreadcrumb";
-import AppHeaderDropdown from "./header/AppHeaderDropdown";
-import AppSidebar from "./AppSidebar";
+import AppBreadcrumb from "./AppBreadcrumb.jsx";
+import AppHeaderDropdown from "./header/AppHeaderDropdown.jsx";
+import AppSidebar from "./AppSidebar.jsx";
 
 export {
   AppBreadcrumb,
   AppContent,
-  //   AppFooter,
   AppHeader,
   AppHeaderDropdown,
   AppSidebar,
